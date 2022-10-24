@@ -1,0 +1,87 @@
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+body {
+	background-color: rgb(240, 240, 240);
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.25;
+}
+
+/* app styling */
+.store-cart__button {
+	position: fixed;
+	width: 50px;
+	height: 50px;
+	background-color: rgb(20, 145, 215);
+	top: 0;
+	right: 0;
+	margin: 1rem;
+	padding: 0.5rem;
+	border-radius: 100%;
+	cursor: pointer;
+}
+.store-cart__quantity {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: rgb(255, 55, 55);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	right: 0;
+	bottom: 0;
+	transform: translateY(6px);
+	border-radius: 100%;
+}
+.store {
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.store-item {
+	padding: 1rem;
+	width: fit-content;
+}
+.store-item__content {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* general styling */
+h3 {
+	font-size: 0.65rem;
+	color: rgb(170, 170, 170);
+}
+h2 {
+	font-size: 1rem;
+}
+p {
+	font-size: 0.85rem;
+}
+h2,
+p {
+	color: rgb(65, 65, 65);
+}
+button {
+	background-color: rgb(20, 145, 215);
+	color: rgb(240, 240, 240);
+	cursor: pointer;
+	border: 0;
+	border-radius: 0.4rem;
+	padding: 0.5rem 0.85rem;
+	font-weight: 700;
+	align-self: center;
+}
+button:hover {
+	background-color: rgb(20, 105, 215);
+}
+img {
+	border-radius: 0.4rem;
+	width: 300px;
+}
