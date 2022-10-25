@@ -5,7 +5,7 @@ import items from '../resources/items.json';
 const StoreItems = () => {
 	return (
 		<>
-			<StoreCart />
+			<StoreCart items={items} />
 			{items.map((item) => (
 				<StoreItem item={item} />
 			))}

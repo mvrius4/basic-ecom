@@ -1,14 +1,6 @@
-type Item = {
-	item: {
-		id: number;
-		name: string;
-		category: string;
-		priceCents: number;
-		imageColor: string;
-	};
-};
+import { IStoreItem } from './StoreCart';
 
-const StoreItem = ({ item }: Item) => {
+const StoreItem = ({ item }: { item: IStoreItem }) => {
 	const IMAGE_URL = `https://dummyimage.com/210x130/${item.imageColor}`;
 
 	return (
