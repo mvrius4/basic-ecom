@@ -1,4 +1,5 @@
 import { IStoreItem } from './StoreCart';
+import { formatCurrency } from '../util/FormatCurrency';
 
 const StoreItem = ({ item }: { item: IStoreItem }) => {
 	const IMAGE_URL = `https://dummyimage.com/210x130/${item.imageColor}`;
@@ -12,7 +13,7 @@ const StoreItem = ({ item }: { item: IStoreItem }) => {
 				<div className='store-item__details'>
 					<h3>{item.category}</h3>
 					<h2>{item.name}</h2>
-					<p>{item.priceCents}</p>
+					<p>{formatCurrency(item.priceCents / 100)}</p>
 				</div>
 				<button>Add To Cart</button>
 			</div>

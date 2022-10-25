@@ -31,9 +31,19 @@ const StoreCart = ({ items }: IPropsStoreItems) => {
 				</svg>
 				<div className='store-cart__quantity'></div>
 			</button>
-			{items.map((item) => (
-				<CartItem item={item} />
-			))}
+			<div className='store-cart__wrapper'>
+				<div className='store-cart__content'>
+					<div className='store-cart__container'>
+						{items.map((item) => (
+							<CartItem item={item} />
+						))}
+					</div>
+					<div className='store-cart__total'>
+						<h2>TOTAL</h2>
+						<h2>$0.00</h2>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };
