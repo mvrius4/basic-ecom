@@ -139,7 +139,6 @@ button:hover {
 	background-color: rgb(20, 105, 215);
 }
 img {
-	border-radius: 0.4rem;
 	width: 1000px;
 	height: 1000px;
 	object-fit: cover;

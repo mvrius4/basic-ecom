@@ -1,8 +1,10 @@
 import { IStoreItem } from './StoreCart';
 import { formatCurrency } from '../util/FormatCurrency';
+import { useStoreContext } from '../context/StoreContext';
 
 const StoreItem = ({ item }: { item: IStoreItem }) => {
 	const IMAGE_URL = `https://dummyimage.com/210x130/${item.imageColor}`;
+	const { addToCart, removeFromCart, cartItems } = useStoreContext();
 
 	return (
 		<div key={item.id} className='store-item'>
@@ -15,7 +17,9 @@ const StoreItem = ({ item }: { item: IStoreItem }) => {
 					<h2>{item.name}</h2>
 					<p>{formatCurrency(item.priceCents / 100)}</p>
 				</div>
-				<button>Add To Cart</button>
+				<button onClick={() => console.log(cartItems)}>
+					Add To Cart
+				</button>
 			</div>
 		</div>
 	);
