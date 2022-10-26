@@ -17,9 +17,7 @@ const StoreItem = ({ item }: { item: IStoreItem }) => {
 					<h2>{item.name}</h2>
 					<p>{formatCurrency(item.priceCents / 100)}</p>
 				</div>
-				<button onClick={() => console.log(cartItems)}>
-					Add To Cart
-				</button>
+				<button onClick={() => addToCart(item.id)}>Add To Cart</button>
 			</div>
 		</div>
 	);

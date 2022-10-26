@@ -2,27 +2,27 @@ import { useState, createContext, useContext, ReactNode } from 'react';
 import CartItem from '../components/CartItem';
 import items from '../resources/items.json';
 
-interface StoreContext {
+interface IStoreContext {
 	addToCart: (id: number) => void;
 	removeFromCart: (id: number) => void;
-	cartItems: CartItem[];
+	cartItems: ICartItem[];
 }
-interface CartItem {
+export interface ICartItem {
 	id: number;
 	quantity: number;
 }
-type ContextProvider = {
+interface StoreProviderProps {
 	children: ReactNode;
-};
+}
 
-const StoreContext = createContext({} as StoreContext);
+const StoreContext = createContext({} as IStoreContext);
 
 export const useStoreContext = () => {
 	return useContext(StoreContext);
 };
 
-export const storeProvider = ({ children }: ContextProvider) => {
-	const [cartItems, setCartItems] = useState<CartItem[]>([]);
+export const StoreProvider = ({ children }: StoreProviderProps) => {
+	const [cartItems, setCartItems] = useState<ICartItem[]>([]);
 
 	const addToCart = (id: number) => {
 		setCartItems((currentItems) => {
@@ -38,9 +38,7 @@ export const storeProvider = ({ children }: ContextProvider) => {
 		});
 		cartItems.forEach((item) => {
 			const shopItem = items.find((i) => i.id === item.id);
-
-			console.log(shopItem);
-			// render every item in cart
+			// return <CartItem item={item} />;
 		});
 	};
 

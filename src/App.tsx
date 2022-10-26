@@ -1,11 +1,14 @@
 import StoreItems from './components/StoreItems';
+import { StoreProvider } from './context/StoreContext';
 import './App.css';
 
 function App() {
 	return (
-		<div className='store'>
-			<StoreItems />
-		</div>
+		<StoreProvider>
+			<div className='store'>
+				<StoreItems />
+			</div>
+		</StoreProvider>
 	);
 }
 
