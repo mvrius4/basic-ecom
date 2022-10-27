@@ -1,11 +1,17 @@
-import { useState, createContext, useContext, ReactNode } from 'react';
-import CartItem from '../components/CartItem';
-import items from '../resources/items.json';
+import {
+	useState,
+	createContext,
+	useContext,
+	ReactNode,
+	useEffect,
+} from 'react';
 
 interface IStoreContext {
 	addToCart: (id: number) => void;
 	removeFromCart: (id: number) => void;
+	toggleCart: () => void;
 	cartItems: ICartItem[];
+	isOpen: boolean;
 }
 export interface ICartItem {
 	id: number;
@@ -15,6 +21,7 @@ interface StoreProviderProps {
 	children: ReactNode;
 }
 
+const LOCAL_STORAGE_KEY = 'shopping-cart-items';
 const StoreContext = createContext({} as IStoreContext);
 
 export const useStoreContext = () => {
@@ -23,6 +30,17 @@ export const useStoreContext = () => {
 
 export const StoreProvider = ({ children }: StoreProviderProps) => {
 	const [cartItems, setCartItems] = useState<ICartItem[]>([]);
+	const [isOpen, setIsOpen] = useState<boolean>(true || false);
+
+	useEffect(() => {
+		const items = localStorage.getItem(LOCAL_STORAGE_KEY);
+		if (items != null) setCartItems(JSON.parse(items));
+		console.log(cartItems);
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cartItems));
+	}, [cartItems]);
 
 	const addToCart = (id: number) => {
 		setCartItems((currentItems) => {
@@ -36,6 +54,7 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 				return [...currentItems, { id, quantity: 1 }];
 			}
 		});
+		setIsOpen(true);
 	};
 
 	const removeFromCart = (id: number) => {
@@ -44,8 +63,15 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 		setCartItems(filteredItems);
 	};
 
+	const toggleCart = () => {
+		if (isOpen) setIsOpen(false);
+		else setIsOpen(true);
+	};
+
 	return (
-		<StoreContext.Provider value={{ addToCart, removeFromCart, cartItems }}>
+		<StoreContext.Provider
+			value={{ addToCart, removeFromCart, cartItems, toggleCart, isOpen }}
+		>
 			{children}
 		</StoreContext.Provider>
 	);

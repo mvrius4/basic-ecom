@@ -1,4 +1,5 @@
 import { useStoreContext } from '../context/StoreContext';
+import { formatCurrency } from '../util/FormatCurrency';
 import CartItem from './CartItem';
 
 export interface IStoreItem {
@@ -14,10 +15,25 @@ export interface IPropsStoreItems {
 }
 
 const StoreCart = ({ items }: IPropsStoreItems) => {
-	const { cartItems } = useStoreContext();
+	const { cartItems, toggleCart, isOpen } = useStoreContext();
+	const cartElements = cartItems.map((item) => {
+		const shopItem = items.find((i) => i.id === item.id);
+		if (shopItem)
+			return (
+				<CartItem
+					key={item.id}
+					quantity={item.quantity}
+					item={shopItem}
+				/>
+			);
+	});
+	const cartTotalCents = cartItems.reduce((sum: any, entry) => {
+		const shopItem = items.find((i) => i.id === entry.id);
+		if (shopItem) return sum + entry.quantity * shopItem.priceCents;
+	}, 0);
 	return (
 		<>
-			<button className='store-cart__button'>
+			<button onClick={() => toggleCart()} className='store-cart__button'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					fill='none'
@@ -33,27 +49,15 @@ const StoreCart = ({ items }: IPropsStoreItems) => {
 				</svg>
 				<div className='store-cart__quantity'>{cartItems.length}</div>
 			</button>
-			{cartItems.length > 0 && (
+			{isOpen && cartItems.length > 0 && (
 				<div className='store-cart__wrapper'>
 					<div className='store-cart__content'>
 						<div className='store-cart__container'>
-							{cartItems.map((item) => {
-								const shopItem = items.find(
-									(i) => i.id === item.id,
-								);
-								if (shopItem)
-									return (
-										<CartItem
-											key={item.id}
-											quantity={item.quantity}
-											item={shopItem}
-										/>
-									);
-							})}
+							{cartElements}
 						</div>
 						<div className='store-cart__total'>
 							<h2>TOTAL</h2>
-							<h2>$0.00</h2>
+							<h2>{formatCurrency(cartTotalCents / 100)}</h2>
 						</div>
 					</div>
 				</div>
