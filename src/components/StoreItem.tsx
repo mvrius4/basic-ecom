@@ -7,7 +7,7 @@ const StoreItem = ({ item }: { item: IStoreItem }) => {
 	const { addToCart, removeFromCart, cartItems } = useStoreContext();
 
 	return (
-		<div key={item.id} className='store-item'>
+		<div className='store-item'>
 			<div className='store-item__image'>
 				<img src={IMAGE_URL} alt='ecommerce' />
 			</div>

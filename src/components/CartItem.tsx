@@ -1,7 +1,12 @@
 import { IStoreItem } from './StoreCart';
 import { formatCurrency } from '../util/FormatCurrency';
 
-const CartItem = ({ item }: { item: IStoreItem }) => {
+interface ICartProps {
+	item: IStoreItem;
+	quantity: number;
+}
+
+const CartItem = ({ item, quantity }: ICartProps) => {
 	const IMAGE_URL = `https://dummyimage.com/210x130/${item.imageColor}`;
 
 	return (
@@ -12,7 +17,7 @@ const CartItem = ({ item }: { item: IStoreItem }) => {
 			</div>
 			<div className='store-cart__content'>
 				<div className='store-cart__details'>
-					<h2>{`${item.name} ${item.id}`}</h2>
+					<h2>{`${item.name} x${quantity}`}</h2>
 					<p>{formatCurrency(item.priceCents / 100)}</p>
 				</div>
 			</div>

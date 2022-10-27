@@ -36,10 +36,6 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 				return [...currentItems, { id, quantity: 1 }];
 			}
 		});
-		cartItems.forEach((item) => {
-			const shopItem = items.find((i) => i.id === item.id);
-			// return <CartItem item={item} />;
-		});
 	};
 
 	const removeFromCart = (id: number) => {
