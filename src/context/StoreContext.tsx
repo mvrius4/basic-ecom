@@ -35,7 +35,6 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 	useEffect(() => {
 		const items = localStorage.getItem(LOCAL_STORAGE_KEY);
 		if (items != null) setCartItems(JSON.parse(items));
-		console.log(cartItems);
 	}, []);
 
 	useEffect(() => {
@@ -59,7 +58,6 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 
 	const removeFromCart = (id: number) => {
 		const filteredItems = cartItems.filter((item) => item.id !== id);
-		console.log(filteredItems);
 		setCartItems(filteredItems);
 	};
 
